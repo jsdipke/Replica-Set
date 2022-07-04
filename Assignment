@@ -1,0 +1,22 @@
+
+	1. What are the differences file-wise?
+	Apiversion is placed at aap/ location in rs
+	Kind for rc is ReplicationController and ReplicaSet for rs
+	Name is kubia2 for rc and kubia for rs
+	
+	2. Run the kubia-replicaset.yaml .
+	
+	3. Identify what commands can be run after "kubectl apply...."
+	kubectl apply -f kubia-replicaset.yaml
+	kubectl get po
+	kubectl get rs
+	4. Make a service over these pods (kubia-replicaset) and see if the service picks up the web-service within the pod ("You have hit....." message)
+	kubectl get svc
+	[root@ip-172-31-31-219 05-services]# curl 10.99.10.100:80
+	You've hit kubia-dtcpp
+	[root@ip-172-31-31-219 05-services]#
+	Pods are changing frequently 
+	5. Negative Testing : change the labels of the pod and see if the service is still applied on those pods
+kubectl label po kubia-w25r6 app=mavenir --overwrite
+After changing name one more pod created with existing pod 
+I was replaced replica 3 to 1 now only one pod was there and service running on it, after changing lable of pod one more pod created and service running on newly created pod.
